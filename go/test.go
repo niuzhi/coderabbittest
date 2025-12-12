@@ -1,16 +1,20 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
 
-func readFileContent(filename string) string {
-	data, _ := os.ReadFile(filename)
-	return string(data)
+type User struct {
+	Name string
+	Age  int
+}
+
+func getUser(id int) *User {
+	if id <= 0 {
+		return nil
+	}
+	return &User{Name: fmt.Sprintf("User%d", id), Age: 20 + id}
 }
 
 func main() {
-	content := readFileContent("nonexistent_file.txt")
-	fmt.Println("文件内容：", content)
+	user := getUser(-1)
+	fmt.Println("用户名：", user.Name)
 }
